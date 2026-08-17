@@ -1,0 +1,599 @@
+﻿<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BestNet | IT & CCTV Systems</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #014554;
+            --secondary-bg: #00222a;
+            --accent-color: #00ffcc;
+            --text-color: #ffffff;
+            --card-bg: rgba(1, 69, 84, 0.75);
+            --border-color: rgba(0, 255, 204, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #014554 0%, #001a22 100%);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .sky-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            background: radial-gradient(circle at center, #015c70 0%, #001a22 100%);
+        }
+
+        .star {
+            position: absolute;
+            background: #ffffff;
+            border-radius: 50%;
+            animation: twinkle 2s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Animated Meteors on Both Sides */
+        .meteor-left, .meteor-right {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+            opacity: 0;
+            z-index: 2;
+        }
+
+        .meteor-left {
+            animation: fallLeft 4s linear infinite;
+        }
+
+        .meteor-right {
+            animation: fallRight 3.5s linear infinite;
+        }
+
+        @keyframes fallLeft {
+            0% {
+                transform: translateY(-50px) translateX(0) rotate(45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(105vh) translateX(-350px) rotate(45deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fallRight {
+            0% {
+                transform: translateY(-50px) translateX(0) rotate(-45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(105vh) translateX(350px) rotate(-45deg);
+                opacity: 0;
+            }
+        }
+
+        /* Fixed Dahua Corner Logo - Fully Visible */
+        .corner-dahua-logo {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            object-fit: contain;
+            border: 2px solid var(--accent-color);
+            background: #fff;
+            z-index: 10;
+            padding: 4px;
+            box-shadow: 0 0 15px rgba(0,255,204,0.6);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 5;
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+            padding: 5px;
+            border-radius: 20px;
+            justify-content: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            padding: 6px 14px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .lang-btn.active {
+            background: var(--accent-color);
+            color: var(--secondary-bg);
+            font-weight: bold;
+            box-shadow: 0 0 10px var(--accent-color);
+        }
+
+        .profile {
+            text-align: center;
+            margin-bottom: 15px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Perfect Main Logo Container - Fully Visible */
+        .logo-container {
+            position: relative;
+            width: 135px;
+            height: 135px;
+            border-radius: 50%;
+            padding: 5px;
+            background: linear-gradient(135deg, var(--accent-color), rgba(1,69,84,0.9));
+            box-shadow: 0 0 30px rgba(0, 255, 204, 0.6);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: contain;
+            background: #fff;
+            padding: 6px;
+        }
+
+        .brand-desc {
+            font-size: 14px;
+            color: #b0eedd;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .brand-slogan {
+            font-size: 13px;
+            color: var(--accent-color);
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: rgba(0, 255, 204, 0.12);
+            padding: 6px 16px;
+            border-radius: 20px;
+            border: 1px dashed rgba(0, 255, 204, 0.5);
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .status-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+        }
+
+        .status-dot.open { background-color: #2ecc71; box-shadow: 0 0 10px #2ecc71; }
+        .status-dot.closed { background-color: #e74c3c; box-shadow: 0 0 10px #e74c3c; }
+
+        /* Address & Map Section */
+        .address-section {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .address-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 14px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .addr-header {
+            padding: 14px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            background: rgba(255,255,255,0.04);
+            font-size: 14px;
+            font-weight: 700;
+            color: #ffffff;
+            direction: rtl;
+        }
+
+        .addr-header i.arrow {
+            color: var(--accent-color);
+            font-size: 13px;
+            transition: transform 0.3s ease;
+        }
+
+        .address-card.expanded .addr-header i.arrow {
+            transform: rotate(180deg);
+        }
+
+        .addr-content {
+            padding: 0 16px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            font-size: 13px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            text-align: right;
+            direction: rtl;
+            color: #d1f5ee;
+            font-weight: 600;
+        }
+
+        .address-card.expanded .addr-content {
+            max-height: 180px;
+            padding: 14px 16px;
+        }
+
+        .map-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+            color: var(--secondary-bg);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 9px 16px;
+            background: var(--accent-color);
+            border-radius: 8px;
+            box-shadow: 0 0 12px rgba(0, 255, 204, 0.4);
+            direction: rtl;
+        }
+
+        /* Links List */
+        .links-list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .link-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .link-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .link-icon {
+            font-size: 18px;
+            color: var(--accent-color);
+            width: 25px;
+            text-align: center;
+        }
+
+        .link-title {
+            font-size: 15px;
+            font-weight: 700;
+            direction: ltr;
+            unicode-bidi: embed;
+        }
+
+        .direct-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .action-icon-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .action-icon-btn.call {
+            background: rgba(0, 255, 204, 0.15);
+            color: var(--accent-color);
+            border: 1px solid rgba(0, 255, 204, 0.4);
+        }
+        .action-icon-btn.call:hover { background: var(--accent-color); color: var(--secondary-bg); transform: scale(1.1); }
+
+        .action-icon-btn.wa {
+            background: rgba(37, 211, 102, 0.15);
+            color: #25D366;
+            border: 1px solid rgba(37, 211, 102, 0.4);
+        }
+        .action-icon-btn.wa:hover { background: #25D366; color: #fff; transform: scale(1.1); }
+
+        .action-icon-btn.vb {
+            background: rgba(115, 96, 242, 0.15);
+            color: #9d8fff;
+            border: 1px solid rgba(115, 96, 242, 0.4);
+        }
+        .action-icon-btn.vb:hover { background: #7360f2; color: #fff; transform: scale(1.1); }
+
+        .social-link {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        /* 4K Ultra HD Video Box at the Bottom with Autoplay */
+        .video-box {
+            width: 100%;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 2px solid var(--accent-color);
+            background: #000;
+            box-shadow: 0 4px 30px rgba(0, 255, 204, 0.7);
+        }
+
+        .video-box video {
+            width: 100%;
+            height: auto;
+            max-height: 340px;
+            display: block;
+            object-fit: cover;
+            filter: contrast(1.1) saturate(1.15) brightness(1.05);
+        }
+
+        footer {
+            margin-top: 25px;
+            font-size: 11px;
+            color: #8ab8be;
+            text-align: center;
+            padding-bottom: 10px;
+            z-index: 5;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sky-bg" id="skyBg"></div>
+    <img src="dahua-logo.jpg" alt="Dahua Logo" class="corner-dahua-logo">
+
+    <div class="container">
+        <div class="lang-switcher">
+            <button class="lang-btn active" onclick="changeLang('ku')">کوردی</button>
+            <button class="lang-btn" onclick="changeLang('ar')">العربية</button>
+            <button class="lang-btn" onclick="changeLang('en')">English</button>
+        </div>
+
+        <div class="profile">
+            <div class="logo-container">
+                <img src="logo.jpeg" alt="BestNet Logo" class="logo-img">
+            </div>
+            <p class="brand-desc" id="subtitle">وەکیلی سەرەکی براندی دەهوا</p>
+            <div class="brand-slogan" id="sloganText">پاراستنی ماڵ و شوێنەکەت ئامانجی ئێمەیە</div>
+            <div class="status-badge">
+                <span class="status-dot" id="statusDot"></span>
+                <span id="statusText">پشکنینی کات...</span>
+            </div>
+        </div>
+
+        <div class="address-section">
+            <div class="address-card" id="addrCard1">
+                <div class="addr-header" onclick="toggleAddress('addrCard1')">
+                    <span id="branch1Title"><i class="fa-solid fa-map-location-dot" style="color: var(--accent-color); margin-left: 8px;"></i> لقی یەکەم: شەقامی سالم</span>
+                    <i class="fa fa-chevron-down arrow"></i>
+                </div>
+                <div class="addr-content">
+                    <p id="branch1Desc">سلێمانی - جادەی سالم - تەلاری ئەپڵ - بەرامبەر کارگەی جگەرەکە</p>
+                    <a href="https://maps.google.com" target="_blank" class="map-btn"><i class="fa-solid fa-location-arrow" style="margin-left: 5px;"></i> نیشاندانی لەسەر نەخشە</a>
+                </div>
+            </div>
+
+            <div class="address-card" id="addrCard2">
+                <div class="addr-header" onclick="toggleAddress('addrCard2')">
+                    <span id="branch2Title"><i class="fa-solid fa-map-location-dot" style="color: var(--accent-color); margin-left: 8px;"></i> لقی دووەم: شەقامی کاوە</span>
+                    <i class="fa fa-chevron-down arrow"></i>
+                </div>
+                <div class="addr-content">
+                    <p id="branch2Desc">سلێمانی - جادەی کاوە - سەروو بازاڕی جگەرەکە</p>
+                    <a href="https://maps.google.com" target="_blank" class="map-btn"><i class="fa-solid fa-location-arrow" style="margin-left: 5px;"></i> نیشاندانی لەسەر نەخشە</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="links-list">
+            <div class="link-card">
+                <div class="link-info">
+                    <i class="fa-solid fa-phone-volume link-icon"></i>
+                    <span class="link-title">0773 550 60 60</span>
+                </div>
+                <div class="direct-actions">
+                    <a href="tel:07735506060" class="action-icon-btn call" title="تەلەفۆن"><i class="fa-solid fa-phone"></i></a>
+                    <a href="https://wa.me/9647735506060" target="_blank" class="action-icon-btn wa" title="واتسئەپ"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="viber://chat?number=%2B9647735506060" class="action-icon-btn vb" title="ڤایبەر"><i class="fa-brands fa-viber"></i></a>
+                </div>
+            </div>
+
+            <div class="link-card">
+                <div class="link-info">
+                    <i class="fa-solid fa-phone-volume link-icon"></i>
+                    <span class="link-title">0773 750 60 60</span>
+                </div>
+                <div class="direct-actions">
+                    <a href="tel:07737506060" class="action-icon-btn call" title="تەلەفۆن"><i class="fa-solid fa-phone"></i></a>
+                    <a href="https://wa.me/9647737506060" target="_blank" class="action-icon-btn wa" title="واتسئەپ"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="viber://chat?number=%2B9647737506060" class="action-icon-btn vb" title="ڤایبەر"><i class="fa-brands fa-viber"></i></a>
+                </div>
+            </div>
+
+            <div class="link-card">
+                <div class="link-info">
+                    <i class="fa-solid fa-phone-volume link-icon"></i>
+                    <span class="link-title">0770 852 53 11</span>
+                </div>
+                <div class="direct-actions">
+                    <a href="tel:07708525311" class="action-icon-btn call" title="تەلەفۆن"><i class="fa-solid fa-phone"></i></a>
+                    <a href="https://wa.me/9647708525311" target="_blank" class="action-icon-btn wa" title="واتسئەپ"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="viber://chat?number=%2B9647708525311" class="action-icon-btn vb" title="ڤایبەر"><i class="fa-brands fa-viber"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <a href="https://www.facebook.com/share/19GevUsQRB/" target="_blank" class="social-link">
+            <i class="fa-brands fa-facebook link-icon" style="color: #1877F2; font-size: 20px;"></i>
+            <span class="link-title" id="fbText" style="direction: rtl;">پەیجی فەیسبووک / Facebook</span>
+        </a>
+
+        <div class="video-box">
+            <video id="autoVideo" controls autoplay loop playsinline preload="auto">
+                <source src="video.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <footer>
+            © 2026 BestNet. All Rights Reserved.
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const sky = document.getElementById('skyBg');
+            
+            // Generate Stars
+            for (let i = 0; i < 40; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                const size = Math.random() * 3 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.animationDuration = `${Math.random() * 3 + 1}s`;
+                sky.appendChild(star);
+            }
+
+            // Generate Meteors on Both Left & Right Sides
+            for (let i = 0; i < 3; i++) {
+                const meteorLeft = document.createElement('div');
+                meteorLeft.className = 'meteor-left';
+                meteorLeft.style.top = `${Math.random() * 40}%`;
+                meteorLeft.style.left = `${Math.random() * 50}%`;
+                meteorLeft.style.animationDuration = `${Math.random() * 2 + 2.5}s`;
+                meteorLeft.style.animationDelay = `${Math.random() * 5}s`;
+                sky.appendChild(meteorLeft);
+
+                const meteorRight = document.createElement('div');
+                meteorRight.className = 'meteor-right';
+                meteorRight.style.top = `${Math.random() * 40}%`;
+                meteorRight.style.right = `${Math.random() * 50}%`;
+                meteorRight.style.animationDuration = `${Math.random() * 2 + 2.5}s`;
+                meteorRight.style.animationDelay = `${Math.random() * 5}s`;
+                sky.appendChild(meteorRight);
+            }
+
+            // Ensure Autoplay works reliably across modern browsers
+            const vid = document.getElementById('autoVideo');
+            vid.play().catch(error => {
+                // Fallback for strict browser autoplay policies (mutes temporarily if blocked, then plays)
+                vid.muted = true;
+                vid.play();
+            });
+
+            checkWorkingHours();
+        });
+
+        function toggleAddress(cardId) {
+            document.getElementById(cardId).classList.toggle('expanded');
+        }
+
+        function checkWorkingHours() {
+            const now = new Date();
+            const hour = now.getHours();
+            const dot = document.getElementById('statusDot');
+            const text = document.getElementById('statusText');
+            
+            if (hour >= 9 && hour < 18) {
+                dot.className = "status-dot open";
+                text.textContent = "کراوەیە (دەوام: ٩ بەیانی - ٦ ئێوارە)";
+            } else {
+                dot.className = "status-dot closed";
+                text.textContent = "داخراوە (دەوام: ٩ بەیانی - ٦ ئێوارە)";
+            }
+        }
+    </script>
+</body>
+</html>
