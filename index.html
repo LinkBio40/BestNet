@@ -3,55 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BestNet | IT & CCTV Systems</title>
+    <title>BestNet - Dahua Authorized Distributor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --primary-bg: #014554;
-            --secondary-bg: #00222a;
-            --accent-color: #00ffcc;
+            --primary-bg: #031b28;
+            --secondary-bg: #062d42;
+            --accent-cyan: #00f2fe;
+            --accent-blue: #4facfe;
             --text-color: #ffffff;
-            --card-bg: rgba(1, 69, 84, 0.75);
-            --border-color: rgba(0, 255, 204, 0.4);
+            --text-muted: #b0c4de;
+            --card-bg: rgba(6, 45, 66, 0.85);
+            --card-border: rgba(0, 242, 254, 0.4);
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Vazirmatn', sans-serif;
+            box-sizing: border-box;
+            font-family: 'Cairo', 'Tajawal', sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, #014554 0%, #001a22 100%);
+            background-color: var(--primary-bg);
             color: var(--text-color);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 20px;
-            line-height: 1.6;
             position: relative;
             overflow-x: hidden;
         }
 
-        .sky-bg {
+        /* Animated Starry & Meteor Background */
+        .space-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            background: radial-gradient(circle at center, #015c70 0%, #001a22 100%);
+            z-index: -1;
+            background: radial-gradient(ellipse at bottom, #031b28 0%, #010c13 100%);
+            overflow: hidden;
         }
 
         .star {
             position: absolute;
             background: #ffffff;
             border-radius: 50%;
-            animation: twinkle 2s infinite ease-in-out;
+            animation: twinkle 3s infinite ease-in-out;
         }
 
         @keyframes twinkle {
@@ -59,540 +62,443 @@
             50% { opacity: 1; transform: scale(1.2); }
         }
 
-        /* Animated Meteors on Both Sides */
-        .meteor-left, .meteor-right {
+        .meteor {
             position: absolute;
-            width: 3px;
-            height: 3px;
-            background: #fff;
+            height: 2px;
+            background: linear-gradient(-45deg, rgba(0,242,254,1), rgba(0,0,0,0));
             border-radius: 50%;
-            box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
-            opacity: 0;
-            z-index: 2;
+            filter: drop-shadow(0 0 6px #00f2fe);
+            animation: fall linear infinite;
         }
 
-        .meteor-left {
-            animation: fallLeft 4s linear infinite;
-        }
-
-        .meteor-right {
-            animation: fallRight 3.5s linear infinite;
-        }
-
-        @keyframes fallLeft {
+        @keyframes fall {
             0% {
-                transform: translateY(-50px) translateX(0) rotate(45deg);
+                transform: translateX(0) translateY(0) rotate(-45deg);
                 opacity: 1;
             }
             100% {
-                transform: translateY(105vh) translateX(-350px) rotate(45deg);
+                transform: translateX(-500px) translateY(500px) rotate(-45deg);
                 opacity: 0;
             }
         }
 
-        @keyframes fallRight {
-            0% {
-                transform: translateY(-50px) translateX(0) rotate(-45deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(105vh) translateX(350px) rotate(-45deg);
-                opacity: 0;
-            }
+        /* Top Bar: Language Switcher on Left, Larger Dahua Logo on Right Corner */
+        .top-bar {
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
         }
 
-        /* Fixed Dahua Corner Logo - Fully Visible */
-        .corner-dahua-logo {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            width: 65px;
-            height: 65px;
+        .dahua-logo-img {
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             object-fit: contain;
-            border: 2px solid var(--accent-color);
-            background: #fff;
-            z-index: 10;
-            padding: 4px;
-            box-shadow: 0 0 15px rgba(0,255,204,0.6);
+            border: 3px solid var(--accent-cyan);
+            background: #ffffff;
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.7);
+            padding: 5px;
         }
 
-        .container {
-            width: 100%;
-            max-width: 480px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 5;
-        }
-
-        .lang-switcher {
+        .lang-switch {
             display: flex;
             gap: 8px;
-            margin-bottom: 20px;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(5px);
-            padding: 5px;
-            border-radius: 20px;
-            justify-content: center;
-            border: 1px solid var(--border-color);
         }
 
         .lang-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-color);
-            padding: 6px 14px;
+            background: var(--secondary-bg);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            padding: 5px 12px;
             border-radius: 15px;
             cursor: pointer;
             font-size: 13px;
-            transition: 0.3s;
+            font-weight: 700;
+            transition: all 0.3s;
         }
 
-        .lang-btn.active {
-            background: var(--accent-color);
-            color: var(--secondary-bg);
-            font-weight: bold;
-            box-shadow: 0 0 10px var(--accent-color);
+        .lang-btn.active, .lang-btn:hover {
+            background: var(--accent-cyan);
+            color: var(--primary-bg);
+            box-shadow: 0 0 12px var(--accent-cyan);
         }
 
-        .profile {
+        /* Container */
+        .container {
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            z-index: 2;
+        }
+
+        /* Profile Section */
+        .profile-card {
             text-align: center;
-            margin-bottom: 15px;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            margin-bottom: 10px;
         }
 
-        /* Perfect Main Logo Container - Fully Visible */
-        .logo-container {
-            position: relative;
-            width: 135px;
-            height: 135px;
+        .store-logo {
+            width: 115px;
+            height: 115px;
             border-radius: 50%;
-            padding: 5px;
-            background: linear-gradient(135deg, var(--accent-color), rgba(1,69,84,0.9));
-            box-shadow: 0 0 30px rgba(0, 255, 204, 0.6);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .logo-img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: contain;
-            background: #fff;
-            padding: 6px;
-        }
-
-        .brand-desc {
-            font-size: 14px;
-            color: #b0eedd;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-
-        .brand-slogan {
-            font-size: 13px;
-            color: var(--accent-color);
-            font-weight: 700;
+            border: 3px solid var(--accent-cyan);
+            object-fit: cover;
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
             margin-bottom: 12px;
-            background: rgba(0, 255, 204, 0.12);
-            padding: 6px 16px;
-            border-radius: 20px;
-            border: 1px dashed rgba(0, 255, 204, 0.5);
+            background-color: #fff;
         }
 
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(5px);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            margin-bottom: 20px;
-            border: 1px solid var(--border-color);
+        h1 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 5px;
+            color: #fff;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.6);
         }
 
-        .status-dot {
-            width: 9px;
-            height: 9px;
-            border-radius: 50%;
-        }
-
-        .status-dot.open { background-color: #2ecc71; box-shadow: 0 0 10px #2ecc71; }
-        .status-dot.closed { background-color: #e74c3c; box-shadow: 0 0 10px #e74c3c; }
-
-        /* Address & Map Section */
-        .address-section {
-            width: 100%;
-            margin-bottom: 15px;
-        }
-
-        .address-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border-radius: 14px;
-            margin-bottom: 12px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-        }
-
-        .addr-header {
-            padding: 14px 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            background: rgba(255,255,255,0.04);
-            font-size: 14px;
+        p.subtitle {
+            font-size: 16px;
+            color: var(--accent-cyan);
             font-weight: 700;
-            color: #ffffff;
-            direction: rtl;
+            letter-spacing: 0.5px;
         }
 
-        .addr-header i.arrow {
-            color: var(--accent-color);
-            font-size: 13px;
-            transition: transform 0.3s ease;
-        }
-
-        .address-card.expanded .addr-header i.arrow {
-            transform: rotate(180deg);
-        }
-
-        .addr-content {
-            padding: 0 16px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
-            font-size: 13px;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            text-align: right;
-            direction: rtl;
-            color: #d1f5ee;
-            font-weight: 600;
-        }
-
-        .address-card.expanded .addr-content {
-            max-height: 180px;
-            padding: 14px 16px;
-        }
-
-        .map-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 12px;
-            color: var(--secondary-bg);
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 700;
-            padding: 9px 16px;
-            background: var(--accent-color);
-            border-radius: 8px;
-            box-shadow: 0 0 12px rgba(0, 255, 204, 0.4);
-            direction: rtl;
-        }
-
-        /* Links List */
-        .links-list {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
+        /* Interactive Link Cards */
         .link-card {
+            width: 100%;
             background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border-color);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
             border-radius: 14px;
-            padding: 12px 16px;
+            padding: 16px 20px;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .link-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .link-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            width: 100%;
         }
 
         .link-info {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
         }
 
-        .link-icon {
-            font-size: 18px;
-            color: var(--accent-color);
-            width: 25px;
+        .link-info i {
+            font-size: 22px;
+            color: var(--accent-cyan);
+            width: 30px;
             text-align: center;
         }
 
         .link-title {
-            font-size: 15px;
+            font-size: 17px;
             font-weight: 700;
-            direction: ltr;
-            unicode-bidi: embed;
+            color: #ffffff;
         }
 
-        .direct-actions {
+        .arrow-icon {
+            transition: transform 0.3s ease;
+            color: var(--text-muted);
+        }
+
+        .link-card.active .arrow-icon {
+            transform: rotate(180deg);
+            color: var(--accent-cyan);
+        }
+
+        /* Sub-options (Dropdown details) */
+        .sub-options {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
             display: flex;
+            flex-direction: column;
             gap: 10px;
-            align-items: center;
-        }
-
-        .action-icon-btn {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            font-size: 16px;
-            transition: 0.2s;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        }
-
-        .action-icon-btn.call {
-            background: rgba(0, 255, 204, 0.15);
-            color: var(--accent-color);
-            border: 1px solid rgba(0, 255, 204, 0.4);
-        }
-        .action-icon-btn.call:hover { background: var(--accent-color); color: var(--secondary-bg); transform: scale(1.1); }
-
-        .action-icon-btn.wa {
-            background: rgba(37, 211, 102, 0.15);
-            color: #25D366;
-            border: 1px solid rgba(37, 211, 102, 0.4);
-        }
-        .action-icon-btn.wa:hover { background: #25D366; color: #fff; transform: scale(1.1); }
-
-        .action-icon-btn.vb {
-            background: rgba(115, 96, 242, 0.15);
-            color: #9d8fff;
-            border: 1px solid rgba(115, 96, 242, 0.4);
-        }
-        .action-icon-btn.vb:hover { background: #7360f2; color: #fff; transform: scale(1.1); }
-
-        .social-link {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 14px 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            text-decoration: none;
-            color: var(--text-color);
-            margin-bottom: 20px;
             width: 100%;
         }
 
-        /* 4K Ultra HD Video Box at the Bottom with Autoplay */
-        .video-box {
+        .link-card.active .sub-options {
+            max-height: 350px;
+            padding-top: 15px;
+            margin-top: 12px;
+            border-top: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .sub-btn {
+            background: rgba(3, 27, 40, 0.9);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            padding: 12px 15px;
+            border-radius: 9px;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.2s;
+            direction: ltr;
+        }
+
+        .sub-btn:hover {
+            background: rgba(0, 242, 254, 0.2);
+            border-color: var(--accent-cyan);
+        }
+
+        .sub-btn span {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Video Section - Balanced Square Aspect Ratio */
+        .video-container {
             width: 100%;
+            aspect-ratio: 1 / 1;
+            max-height: 420px;
             border-radius: 14px;
             overflow: hidden;
-            border: 2px solid var(--accent-color);
+            border: 1px solid var(--card-border);
+            margin-top: 10px;
             background: #000;
-            box-shadow: 0 4px 30px rgba(0, 255, 204, 0.7);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .video-box video {
+        .video-container video {
             width: 100%;
-            height: auto;
-            max-height: 340px;
-            display: block;
+            height: 100%;
             object-fit: cover;
-            filter: contrast(1.1) saturate(1.15) brightness(1.05);
         }
 
-        footer {
+        /* Footer */
+        .footer {
             margin-top: 25px;
-            font-size: 11px;
-            color: #8ab8be;
+            font-size: 13px;
+            color: var(--text-muted);
             text-align: center;
-            padding-bottom: 10px;
-            z-index: 5;
         }
     </style>
 </head>
 <body>
 
-    <div class="sky-bg" id="skyBg"></div>
-    <img src="dahua-logo.jpg" alt="Dahua Logo" class="corner-dahua-logo">
+    <div class="space-bg" id="spaceBg"></div>
+
+    <div class="top-bar">
+        <div class="lang-switch">
+            <button class="lang-btn active" onclick="setLanguage('ku')">کوردی</button>
+            <button class="lang-btn" onclick="setLanguage('ar')">عربي</button>
+            <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+        </div>
+        <img src="dahua.jpg" alt="Dahua Logo" class="dahua-logo-img" onerror="this.style.display='none'">
+    </div>
 
     <div class="container">
-        <div class="lang-switcher">
-            <button class="lang-btn active" onclick="changeLang('ku')">کوردی</button>
-            <button class="lang-btn" onclick="changeLang('ar')">العربية</button>
-            <button class="lang-btn" onclick="changeLang('en')">English</button>
+        
+        <div class="profile-card">
+            <img src="logo.jpeg" alt="BestNet Logo" class="store-logo" onerror="this.src='https://via.placeholder.com/115?text=BestNet'">
+            <h1 data-key="store_name">BestNet</h1>
+            <p class="subtitle" data-key="store_sub">وەکیلی سەرەکی براندی دەهوا</p>
         </div>
 
-        <div class="profile">
-            <div class="logo-container">
-                <img src="logo.jpeg" alt="BestNet Logo" class="logo-img">
-            </div>
-            <p class="brand-desc" id="subtitle">وەکیلی سەرەکی براندی دەهوا</p>
-            <div class="brand-slogan" id="sloganText">پاراستنی ماڵ و شوێنەکەت ئامانجی ئێمەیە</div>
-            <div class="status-badge">
-                <span class="status-dot" id="statusDot"></span>
-                <span id="statusText">پشکنینی کات...</span>
-            </div>
-        </div>
-
-        <div class="address-section">
-            <div class="address-card" id="addrCard1">
-                <div class="addr-header" onclick="toggleAddress('addrCard1')">
-                    <span id="branch1Title"><i class="fa-solid fa-map-location-dot" style="color: var(--accent-color); margin-left: 8px;"></i> لقی یەکەم: شەقامی سالم</span>
-                    <i class="fa fa-chevron-down arrow"></i>
-                </div>
-                <div class="addr-content">
-                    <p id="branch1Desc">سلێمانی - جادەی سالم - تەلاری ئەپڵ - بەرامبەر کارگەی جگەرەکە</p>
-                    <a href="https://maps.google.com" target="_blank" class="map-btn"><i class="fa-solid fa-location-arrow" style="margin-left: 5px;"></i> نیشاندانی لەسەر نەخشە</a>
-                </div>
-            </div>
-
-            <div class="address-card" id="addrCard2">
-                <div class="addr-header" onclick="toggleAddress('addrCard2')">
-                    <span id="branch2Title"><i class="fa-solid fa-map-location-dot" style="color: var(--accent-color); margin-left: 8px;"></i> لقی دووەم: شەقامی کاوە</span>
-                    <i class="fa fa-chevron-down arrow"></i>
-                </div>
-                <div class="addr-content">
-                    <p id="branch2Desc">سلێمانی - جادەی کاوە - سەروو بازاڕی جگەرەکە</p>
-                    <a href="https://maps.google.com" target="_blank" class="map-btn"><i class="fa-solid fa-location-arrow" style="margin-left: 5px;"></i> نیشاندانی لەسەر نەخشە</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="links-list">
-            <div class="link-card">
+        <div class="link-card" onclick="toggleCard(this)">
+            <div class="link-header">
                 <div class="link-info">
-                    <i class="fa-solid fa-phone-volume link-icon"></i>
-                    <span class="link-title">0773 550 60 60</span>
+                    <i class="fa-solid fa-phone-volume"></i>
+                    <span class="link-title" data-key="phone_title">پەیوەندی تەلەفۆنی</span>
                 </div>
-                <div class="direct-actions">
-                    <a href="tel:07735506060" class="action-icon-btn call" title="تەلەفۆن"><i class="fa-solid fa-phone"></i></a>
-                    <a href="https://wa.me/9647735506060" target="_blank" class="action-icon-btn wa" title="واتسئەپ"><i class="fa-brands fa-whatsapp"></i></a>
-                    <a href="viber://chat?number=%2B9647735506060" class="action-icon-btn vb" title="ڤایبەر"><i class="fa-brands fa-viber"></i></a>
-                </div>
+                <i class="fa-solid fa-chevron-down arrow-icon"></i>
             </div>
-
-            <div class="link-card">
-                <div class="link-info">
-                    <i class="fa-solid fa-phone-volume link-icon"></i>
-                    <span class="link-title">0773 750 60 60</span>
-                </div>
-                <div class="direct-actions">
-                    <a href="tel:07737506060" class="action-icon-btn call" title="تەلەفۆن"><i class="fa-solid fa-phone"></i></a>
-                    <a href="https://wa.me/9647737506060" target="_blank" class="action-icon-btn wa" title="واتسئەپ"><i class="fa-brands fa-whatsapp"></i></a>
-                    <a href="viber://chat?number=%2B9647737506060" class="action-icon-btn vb" title="ڤایبەر"><i class="fa-brands fa-viber"></i></a>
-                </div>
-            </div>
-
-            <div class="link-card">
-                <div class="link-info">
-                    <i class="fa-solid fa-phone-volume link-icon"></i>
-                    <span class="link-title">0770 852 53 11</span>
-                </div>
-                <div class="direct-actions">
-                    <a href="tel:07708525311" class="action-icon-btn call" title="تەلەفۆن"><i class="fa-solid fa-phone"></i></a>
-                    <a href="https://wa.me/9647708525311" target="_blank" class="action-icon-btn wa" title="واتسئەپ"><i class="fa-brands fa-whatsapp"></i></a>
-                    <a href="viber://chat?number=%2B9647708525311" class="action-icon-btn vb" title="ڤایبەر"><i class="fa-brands fa-viber"></i></a>
-                </div>
+            <div class="sub-options">
+                <a href="tel:07735506060" class="sub-btn"><span><i class="fa-solid fa-phone" style="color: var(--accent-cyan);"></i> 0773 550 60 60</span> <i class="fa-solid fa-angle-left" style="direction: rtl;"></i></a>
+                <a href="tel:07708625311" class="sub-btn"><span><i class="fa-solid fa-phone" style="color: var(--accent-cyan);"></i> 0770 862 53 11</span> <i class="fa-solid fa-angle-left" style="direction: rtl;"></i></a>
+                <a href="tel:07737506060" class="sub-btn"><span><i class="fa-solid fa-phone" style="color: var(--accent-cyan);"></i> 0773 750 60 60</span> <i class="fa-solid fa-angle-left" style="direction: rtl;"></i></a>
             </div>
         </div>
 
-        <a href="https://www.facebook.com/share/19GevUsQRB/" target="_blank" class="social-link">
-            <i class="fa-brands fa-facebook link-icon" style="color: #1877F2; font-size: 20px;"></i>
-            <span class="link-title" id="fbText" style="direction: rtl;">پەیجی فەیسبووک / Facebook</span>
+        <div class="link-card" onclick="toggleCard(this)">
+            <div class="link-header">
+                <div class="link-info">
+                    <i class="fa-brands fa-whatsapp" style="color: #25d366;"></i>
+                    <span class="link-title" data-key="whatsapp_title">واتسئەپ</span>
+                </div>
+                <i class="fa-solid fa-chevron-down arrow-icon"></i>
+            </div>
+            <div class="sub-options">
+                <a href="https://wa.me/9647735506060" target="_blank" class="sub-btn"><span><i class="fa-brands fa-whatsapp" style="color: #25d366;"></i> 0773 550 60 60</span> <i class="fa-solid fa-angle-left" style="direction: rtl;"></i></a>
+                <a href="https://wa.me/9647708625311" target="_blank" class="sub-btn"><span><i class="fa-brands fa-whatsapp" style="color: #25d366;"></i> 0770 862 53 11</span> <i class="fa-solid fa-angle-left" style="direction: rtl;"></i></a>
+                <a href="https://wa.me/9647737506060" target="_blank" class="sub-btn"><span><i class="fa-brands fa-whatsapp" style="color: #25d366;"></i> 0773 750 60 60</span> <i class="fa-solid fa-angle-left" style="direction: rtl;"></i></a>
+            </div>
+        </div>
+
+        <div class="link-card" onclick="toggleCard(this)">
+            <div class="link-header">
+                <div class="link-info">
+                    <i class="fa-brands fa-viber" style="color: #7360f2;"></i>
+                    <span class="link-title" data-key="viber_title">ڤایبەر</span>
+                </div>
+                <i class="fa-solid fa-chevron-down arrow-icon"></i>
+            </div>
+            <div class="sub-options">
+                <a href="viber://chat?number=%2B9647735506060" class="sub-btn"><span><i class="fa-brands fa-viber" style="color: #7360f2;"></i> 0773 550 60 60</span> <i class="fa-solid fa-angle-left" style="direction: rtl;"></i></a>
+                <a href="viber://chat?number=%2B9647708625311" class="sub-btn"><span><i class="fa-brands fa-viber" style="color: #7360f2;"></i> 0770 862 53 11</span> <i class="fa-solid fa-angle-left" style="direction: rtl;"></i></a>
+                <a href="viber://chat?number=%2B9647737506060" class="sub-btn"><span><i class="fa-brands fa-viber" style="color: #7360f2;"></i> 0773 750 60 60</span> <i class="fa-solid fa-angle-left" style="direction: rtl;"></i></a>
+            </div>
+        </div>
+
+        <a href="https://www.facebook.com/share/19GevUsQRB/" target="_blank" class="link-card" style="text-decoration: none; color: inherit;">
+            <div class="link-header">
+                <div class="link-info">
+                    <i class="fa-brands fa-facebook" style="color: #1877f2;"></i>
+                    <span class="link-title" data-key="fb_title">پەیجی فەیسبووک</span>
+                </div>
+                <i class="fa-solid fa-arrow-up-right-from-square arrow-icon" style="font-size: 14px;"></i>
+            </div>
         </a>
 
-        <div class="video-box">
-            <video id="autoVideo" controls autoplay loop playsinline preload="auto">
+        <div class="link-card" onclick="toggleCard(this)">
+            <div class="link-header">
+                <div class="link-info">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                    <span class="link-title" data-key="map_title">ناونیشان و نخشەی ماپ</span>
+                </div>
+                <i class="fa-solid fa-chevron-down arrow-icon"></i>
+            </div>
+            <div class="sub-options">
+                <a href="https://maps.app.goo.gl/D3cpvy2WAjAVxYpv7" target="_blank" class="sub-btn" style="direction: rtl;">
+                    <span><i class="fa-solid fa-location-dot" style="color: #ff4757;"></i> <span data-key="branch1">لقی 1: سلێمانی - جادەی سالم (تەلاری ئەپڵ)</span></span> 
+                    <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 12px;"></i>
+                </a>
+                <a href="https://maps.app.goo.gl/grBLaos2gFcphoGo7" target="_blank" class="sub-btn" style="direction: rtl;">
+                    <span><i class="fa-solid fa-location-dot" style="color: #ff4757;"></i> <span data-key="branch2">لقی 2: سلێمانی - تەلاری خانەقا</span></span> 
+                    <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 12px;"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="video-container">
+            <video autoplay muted loop playsinline controls>
                 <source src="video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
             </video>
         </div>
 
-        <footer>
+        <div class="footer">
             © 2026 BestNet. All Rights Reserved.
-        </footer>
+        </div>
+
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const sky = document.getElementById('skyBg');
-            
-            // Generate Stars
-            for (let i = 0; i < 40; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                const size = Math.random() * 3 + 1;
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                star.style.top = `${Math.random() * 100}%`;
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.animationDuration = `${Math.random() * 3 + 1}s`;
-                sky.appendChild(star);
+        // Dropdown Toggle Logic
+        function toggleCard(card) {
+            const isOpen = card.classList.contains('active');
+            document.querySelectorAll('.link-card').forEach(c => c.classList.remove('active'));
+            if (!isOpen) {
+                card.classList.add('active');
             }
-
-            // Generate Meteors on Both Left & Right Sides
-            for (let i = 0; i < 3; i++) {
-                const meteorLeft = document.createElement('div');
-                meteorLeft.className = 'meteor-left';
-                meteorLeft.style.top = `${Math.random() * 40}%`;
-                meteorLeft.style.left = `${Math.random() * 50}%`;
-                meteorLeft.style.animationDuration = `${Math.random() * 2 + 2.5}s`;
-                meteorLeft.style.animationDelay = `${Math.random() * 5}s`;
-                sky.appendChild(meteorLeft);
-
-                const meteorRight = document.createElement('div');
-                meteorRight.className = 'meteor-right';
-                meteorRight.style.top = `${Math.random() * 40}%`;
-                meteorRight.style.right = `${Math.random() * 50}%`;
-                meteorRight.style.animationDuration = `${Math.random() * 2 + 2.5}s`;
-                meteorRight.style.animationDelay = `${Math.random() * 5}s`;
-                sky.appendChild(meteorRight);
-            }
-
-            // Ensure Autoplay works reliably across modern browsers
-            const vid = document.getElementById('autoVideo');
-            vid.play().catch(error => {
-                // Fallback for strict browser autoplay policies (mutes temporarily if blocked, then plays)
-                vid.muted = true;
-                vid.play();
-            });
-
-            checkWorkingHours();
-        });
-
-        function toggleAddress(cardId) {
-            document.getElementById(cardId).classList.toggle('expanded');
         }
 
-        function checkWorkingHours() {
-            const now = new Date();
-            const hour = now.getHours();
-            const dot = document.getElementById('statusDot');
-            const text = document.getElementById('statusText');
-            
-            if (hour >= 9 && hour < 18) {
-                dot.className = "status-dot open";
-                text.textContent = "کراوەیە (دەوام: ٩ بەیانی - ٦ ئێوارە)";
-            } else {
-                dot.className = "status-dot closed";
-                text.textContent = "داخراوە (دەوام: ٩ بەیانی - ٦ ئێوارە)";
+        // Star & Meteor Generator
+        const bg = document.getElementById('spaceBg');
+        for (let i = 0; i < 60; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            let size = Math.random() * 2.5 + 1;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.animationDelay = `${Math.random() * 3}s`;
+            bg.appendChild(star);
+        }
+        for (let i = 0; i < 4; i++) {
+            const meteor = document.createElement('div');
+            meteor.classList.add('meteor');
+            meteor.style.top = `${Math.random() * 50}%`;
+            meteor.style.left = `${Math.random() * 100 + 50}%`;
+            meteor.style.width = `${Math.random() * 80 + 60}px`;
+            meteor.style.animationDuration = `${Math.random() * 3 + 2}s`;
+            meteor.style.animationDelay = `${Math.random() * 5}s`;
+            bg.appendChild(meteor);
+        }
+
+        // Multilingual Support
+        const translations = {
+            ku: {
+                store_sub: "وەکیلی سەرەکی براندی دەهوا",
+                phone_title: "پەیوەندی تەلەفۆنی",
+                whatsapp_title: "واتسئەپ",
+                viber_title: "ڤایبەر",
+                fb_title: "پەیجی فەیسبووک",
+                map_title: "ناونیشان و نخشەی ماپ",
+                branch1: "لقی 1: سلێمانی - جادەی سالم (تەلاری ئەپڵ)",
+                branch2: "لقی 2: سلێمانی - تەلاری خانەقا"
+            },
+            ar: {
+                store_sub: "الوكيل الرئيسي لبراند داهوا",
+                phone_title: "الاتصال الهاتفي",
+                whatsapp_title: "واتساب",
+                viber_title: "فايبر",
+                fb_title: "صفحة الفيسبوك",
+                map_title: "العناوين وخريطة الموقع",
+                branch1: "الفرع 1: السليمانية - شارع سالم (عمارة أبل)",
+                branch2: "الفرع 2: السليمانية - عمارة خانقا"
+            },
+            en: {
+                store_sub: "Authorized Dahua Distributor",
+                phone_title: "Phone Call",
+                whatsapp_title: "WhatsApp",
+                viber_title: "Viber",
+                fb_title: "Facebook Page",
+                map_title: "Locations & Map",
+                branch1: "Branch 1: Sulaymaniyah - Salim St (Apple Building)",
+                branch2: "Branch 2: Sulaymaniyah - Khanaqa Commercial Center"
             }
+        };
+
+        function setLanguage(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if(lang === 'en') {
+                document.documentElement.setAttribute('dir', 'ltr');
+                document.documentElement.setAttribute('lang', 'en');
+            } else {
+                document.documentElement.setAttribute('dir', 'rtl');
+                document.documentElement.setAttribute('lang', lang);
+            }
+
+            const keys = document.querySelectorAll('[data-key]');
+            keys.forEach(el => {
+                const key = el.getAttribute('data-key');
+                if(translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
         }
     </script>
 </body>
