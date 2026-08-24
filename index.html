@@ -26,6 +26,11 @@
             font-family: 'Vazirmatn', sans-serif;
         }
 
+        /* دڵنیابوونەوە لەوەی FontAwesome فۆنتی خۆی بەکاربهێنێت */
+        .fa, .fas, .far, .fal, .fad, .fab, .fa-solid, .fa-brands {
+            font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands" !important;
+        }
+
         body {
             background-color: var(--primary-bg);
             color: var(--text-color);
@@ -38,7 +43,6 @@
             overflow-x: hidden;
         }
 
-        /* Animated Starry & Meteor Background */
         .space-bg {
             position: fixed;
             top: 0;
@@ -82,7 +86,6 @@
             }
         }
 
-        /* Top Bar: Language Switcher on Left, Larger Dahua Logo on Right Corner */
         .top-bar {
             width: 100%;
             max-width: 500px;
@@ -127,7 +130,6 @@
             box-shadow: 0 0 12px var(--accent-cyan);
         }
 
-        /* Container */
         .container {
             width: 100%;
             max-width: 500px;
@@ -138,7 +140,6 @@
             z-index: 2;
         }
 
-        /* Profile Section */
         .profile-card {
             text-align: center;
             margin-bottom: 10px;
@@ -170,7 +171,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* Interactive Link Cards */
         .link-card {
             width: 100%;
             background: var(--card-bg);
@@ -227,7 +227,6 @@
             color: var(--accent-cyan);
         }
 
-        /* Sub-options (Dropdown details) */
         .sub-options {
             max-height: 0;
             overflow: hidden;
@@ -272,7 +271,6 @@
             gap: 10px;
         }
 
-        /* Video Section - Balanced Square Aspect Ratio */
         .video-container {
             width: 100%;
             aspect-ratio: 1 / 1;
@@ -294,7 +292,6 @@
             object-fit: cover;
         }
 
-        /* Footer */
         .footer {
             margin-top: 25px;
             font-size: 13px;
@@ -309,9 +306,9 @@
 
     <div class="top-bar">
         <div class="lang-switch">
-            <button class="lang-btn active" onclick="setLanguage('ku')">کوردی</button>
-            <button class="lang-btn" onclick="setLanguage('ar')">عربي</button>
-            <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+            <button class="lang-btn active" onclick="setLanguage('ku', event)">کوردی</button>
+            <button class="lang-btn" onclick="setLanguage('ar', event)">عربي</button>
+            <button class="lang-btn" onclick="setLanguage('en', event)">EN</button>
         </div>
         <img src="dahua.jpg" alt="Dahua Logo" class="dahua-logo-img" onerror="this.style.display='none'">
     </div>
@@ -362,7 +359,6 @@
             </div>
             <div class="sub-options">
                 <a href="viber://chat?number=%2B9647735506060" class="sub-btn"><span><i class="fa-brands fa-viber" style="color: #7360f2;"></i> 0773 550 60 60</span> <i class="fa-solid fa-angle-left" style="direction: rtl;"></i></a>
-               
                 <a href="viber://chat?number=%2B9647737506060" class="sub-btn"><span><i class="fa-brands fa-viber" style="color: #7360f2;"></i> 0773 750 60 60</span> <i class="fa-solid fa-angle-left" style="direction: rtl;"></i></a>
             </div>
         </div>
@@ -411,7 +407,6 @@
     </div>
 
     <script>
-        // Dropdown Toggle Logic
         function toggleCard(card) {
             const isOpen = card.classList.contains('active');
             document.querySelectorAll('.link-card').forEach(c => c.classList.remove('active'));
@@ -420,7 +415,6 @@
             }
         }
 
-        // Star & Meteor Generator
         const bg = document.getElementById('spaceBg');
         for (let i = 0; i < 60; i++) {
             const star = document.createElement('div');
@@ -444,7 +438,6 @@
             bg.appendChild(meteor);
         }
 
-        // Multilingual Support
         const translations = {
             ku: {
                 store_sub: "وەکیلی سەرەکی براندی دەهوا",
@@ -474,13 +467,13 @@
                 fb_title: "Facebook Page",
                 map_title: "Locations & Map",
                 branch1: "Branch 1: Sulaymaniyah - Salim St (Apple Building)",
-                branch2: "Branch 2: Sulaymaniyah - Khanaqa 
+                branch2: "Branch 2: Sulaymaniyah - Khanaqa"
             }
         };
 
-        function setLanguage(lang) {
+        function setLanguage(lang, e) {
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            if(e && e.target) e.target.classList.add('active');
 
             if(lang === 'en') {
                 document.documentElement.setAttribute('dir', 'ltr');
